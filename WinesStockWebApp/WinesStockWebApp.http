@@ -1,0 +1,6 @@
+@WinesStockWebApp_HostAddress = http://localhost:5170
+
+GET {{WinesStockWebApp_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
