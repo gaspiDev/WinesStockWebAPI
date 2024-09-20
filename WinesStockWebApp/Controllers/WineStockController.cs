@@ -21,14 +21,23 @@ namespace WinesStockWebApp.Controllers
         [Route("Wine")]
         public IActionResult AddWine([FromBody] CreateWineDTO wineDTO)
         {
-            if (_wineServices.AddWine(wineDTO))
+            if (wineDTO == null)
             {
-                return Created();
-            } else return BadRequest("Ese Vino ya existe");
+                return BadRequest();
+            }
+            try
+            {
+                _wineServices.AddWine(wineDTO);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+
+            return Created();
         }
 
         [HttpGet]
-
         public IActionResult WinesStock()
         {
             return Ok(_wineServices.WinesStock());

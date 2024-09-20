@@ -6,19 +6,20 @@ using System.Text;
 using System.Threading.Tasks;
 using Common;
 using Data.Entities;
+using Microsoft.VisualBasic;
 
 namespace Services
 {
     public class WineServices
     {
         public readonly HardCodedDBRepository _hardCodedDBRepository;
-        public WineServices(HardCodedDBRepository hardCodedDBRepository) 
+        public WineServices(HardCodedDBRepository hardCodedDBRepository)
         {
             _hardCodedDBRepository = hardCodedDBRepository;
         }
 
 
-        public bool AddWine(CreateWineDTO createWineDTO) 
+        public void AddWine(CreateWineDTO createWineDTO)
         {
             if (_hardCodedDBRepository.wines.All((wine => wine.Name != createWineDTO.Name)))
             {
@@ -34,11 +35,11 @@ namespace Services
                     CreatedAt = DateTime.UtcNow,
                 }
                 );
-                return true;
-            } else return false;
+            }
+            else throw new InvalidOperationException($"A wine with the name '{createWineDTO.Name}' already exists.");
         }
 
-        public Dictionary<string, int> WinesStock() 
+        public Dictionary<string, int> WinesStock()
         {
             return _hardCodedDBRepository.WinesStock();
         }
