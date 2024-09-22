@@ -37,6 +37,7 @@ namespace WinesStockWebApp.Controllers
         }
 
         [HttpGet]
+        [Route("WineStock")]
         public IActionResult GetAllWinesStock()
         {
             return Ok(_wineServices.GetAllWinesStock());
