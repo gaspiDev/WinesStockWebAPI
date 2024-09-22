@@ -18,8 +18,9 @@ POST) Registrar un nuevo *Wine*
     "stock": 0  
   }  
   ... Procesa la solicitud ...  
-  RESPONSE = Status Code 201 Created -> representacion del recurso creado.  
-           = Staus Code 400 Bad Request -> el nombre del vino ya existe y no se admiten duplicados.  
+  RESPONSE   
+  = Status Code 201 Created -> representacion del recurso creado.  
+  = Staus Code 400 Bad Request -> el nombre del vino ya existe y no se admiten duplicados.   
   
 POST) Registrar un nuevo *User*
   URL = https://localhost:7186/api/WineStock/User
