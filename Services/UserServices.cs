@@ -1,4 +1,4 @@
-﻿using Common;
+﻿using Common.Models;
 using Data.Entities;
 using Data.Repository;
 using System;

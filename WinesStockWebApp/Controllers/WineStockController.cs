@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Services;
-using Common;
+using Common.Models;
 
 namespace WinesStockWebApp.Controllers
 {
