@@ -21,27 +21,23 @@ POST) Registrar un nuevo *Wine*
   RESPONSE   
   = Status Code 201 Created -> representacion del recurso creado.  
   = Staus Code 400 Bad Request -> el nombre del vino ya existe y no se admiten duplicados.   
+    
+      
+POST) Registrar un nuevo *User*  
+  URL = https://localhost:7186/api/WineStock/User  
+  BODY  
+  {  
+    "username": "string",  
+    "password": "stringstri"  
+  }  
+  ... Procesa la solicitud ...  
+  RESPONSE   
+  = Status Code 201 Created -> representacion del recurso creado.    
+  = Staus Code 400 Bad Request -> el nombre de usuario ya existe y no se admiten duplicados  
   
-POST) Registrar un nuevo *User*
-  URL = https://localhost:7186/api/WineStock/User
-  BODY 
-  {
-    "username": "string",
-    "password": "stringstri"
-  }
-  ... Procesa la solicitud ...
-  RESPONSE = Status Code 201 Created -> representacion del recurso creado.
-                                        o
-           = Staus Code 400 Bad Request -> el nombre de usuario ya existe y no se admiten duplicados
-
-GET) Obtener el stock de todos los *Wine*
-  URL = https://localhost:7186/api/WineStock/WineStock
-  ... Procesa la solicitud ...
-  RESPONSE = Status Code 200 Ok -> Diccionario {
-                                                  "WineName": StockQuantity
-                                                  "WineName": StockQuantity
-                                                  "WineName": StockQuantity
-                                                  "WineName": StockQuantity
-                                                  "WineName": StockQuantity
-                                               }
-
+  
+GET) Obtener el stock de todos los *Wine*  
+  URL = https://localhost:7186/api/WineStock/WineStock  
+  ... Procesa la solicitud ...  
+  RESPONSE   
+  = Status Code 200 Ok -> Diccionario { "WineName": StockQuantity }  
