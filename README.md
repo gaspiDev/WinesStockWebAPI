@@ -9,20 +9,18 @@
 #### Estas son las solicitudes HTTP que se pueden realizar hasta el momento:
 POST) Registrar un nuevo *Wine*  
   URL = https://localhost:7186/api/WineStock/Wine  
-  BODY  
-  {
-    "name": "string",
-    "variety": "string",
-    "year": 0,
-    "region": "string",
-    "stock": 0
+  BODY    
+  {  
+    "name": "string",  
+    "variety": "string",  
+    "year": 0,  
+    "region": "string",  
+    "stock": 0  
   }  
+  ... Procesa la solicitud ...  
+  RESPONSE = Status Code 201 Created -> representacion del recurso creado.  
+           = Staus Code 400 Bad Request -> el nombre del vino ya existe y no se admiten duplicados.  
   
-  ... Procesa la solicitud ...
-  RESPONSE = Status Code 201 Created -> representacion del recurso creado.
-                                        
-           = Staus Code 400 Bad Request -> el nombre del vino ya existe y no se admiten duplicados
-
 POST) Registrar un nuevo *User*
   URL = https://localhost:7186/api/WineStock/User
   BODY 
