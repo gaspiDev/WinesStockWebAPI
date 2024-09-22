@@ -19,14 +19,21 @@ namespace Services
 
         public void AddUser(CreateUserDTO createUserDTO)
         {
-            _hardCodedDBRepository.AddUser(
-                new User
-                {
-                    Id = _hardCodedDBRepository.users.Max(x => x.Id) + 1,
-                    Username = createUserDTO.Username,
-                    Password = createUserDTO.Password
-                }    
-                );
+            if (_hardCodedDBRepository.users.All(user => user.Username != createUserDTO.Username))
+            {
+                _hardCodedDBRepository.AddUser(
+                    new User
+                    {
+                        Id = _hardCodedDBRepository.users.Max(x => x.Id) + 1,
+                        Username = createUserDTO.Username,
+                        Password = createUserDTO.Password
+                    }
+                    );
+            }
+            else 
+            {
+                throw new InvalidOperationException();
+            }
         }
     }
 }

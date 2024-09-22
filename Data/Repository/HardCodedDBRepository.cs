@@ -66,7 +66,7 @@ namespace Data.Repository
         { 
             wines.Add(wine);
         }
-        public Dictionary<string, int> WinesStock()
+        public Dictionary<string, int> GetAllWinesStock()
         {
             return wines.ToDictionary(wine => wine.Name, wine => wine.Stock);
         }

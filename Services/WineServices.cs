@@ -36,12 +36,12 @@ namespace Services
                 }
                 );
             }
-            else throw new InvalidOperationException($"A wine with the name '{createWineDTO.Name}' already exists.");
+            else throw new InvalidOperationException();
         }
 
-        public Dictionary<string, int> WinesStock()
+        public Dictionary<string, int> GetAllWinesStock()
         {
-            return _hardCodedDBRepository.WinesStock();
+            return _hardCodedDBRepository.GetAllWinesStock();
         }
     }
 }

@@ -23,32 +23,42 @@ namespace WinesStockWebApp.Controllers
         {
             if (wineDTO == null)
             {
-                return BadRequest();
+                return BadRequest("The request's body is null.");
             }
             try
             {
                 _wineServices.AddWine(wineDTO);
             }
-            catch (InvalidOperationException ex)
+            catch (InvalidOperationException)
             {
-                return BadRequest(new { error = ex.Message });
+                return BadRequest($"A wine with the name {wineDTO.Name.ToUpper()} already exists and can't store duplicates");
             }
-
-            return Created();
+            return Created("Location", "Resource");
         }
 
         [HttpGet]
-        public IActionResult WinesStock()
+        public IActionResult GetAllWinesStock()
         {
-            return Ok(_wineServices.WinesStock());
+            return Ok(_wineServices.GetAllWinesStock());
         }
 
         [HttpPost]
         [Route("User")]
         public IActionResult AddUser([FromBody] CreateUserDTO userDTO)
         {
-            _userServices.AddUser(userDTO);
-            return Created();
+            if (userDTO == null)
+            {
+                return BadRequest("The request's body is null.");
+            }
+            try
+            {
+                _userServices.AddUser(userDTO);
+            }
+            catch (InvalidOperationException)
+            {
+                return BadRequest($"A user with the username {userDTO.Username.ToUpper()} already exists and can't store duplicates");
+            }
+            return Created("Location", "Resource");
         }
     }
 }
