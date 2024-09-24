@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Data.Repository
 {
-    public class HardCodedDBRepository
+    public class WineHardCodedDBRepository
     {
         public List<Wine> wines = new List<Wine>()
         {
@@ -70,32 +70,5 @@ namespace Data.Repository
         {
             return wines.ToDictionary(wine => wine.Name, wine => wine.Stock);
         }
-
-        public List<User> users = new List<User>()
-        {
-            new User
-            {
-                Id = 1,
-                Username = "johndoe",
-                Password = "P@ssw0rd123"
-            },
-            new User
-            {
-                Id = 2,
-                Username = "janedoe",
-                Password = "Secr3tPass!"
-            },
-            new User
-            {
-                Id = 3,
-                Username = "adminuser",
-                Password = "Admin2024!"
-            }
-        };
-        public void AddUser(User user)
-        {
-            users.Add(user);
-        }
-
     }
 }

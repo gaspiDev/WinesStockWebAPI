@@ -11,26 +11,26 @@ namespace Services
 {
     public class UserServices
     {
-        public readonly HardCodedDBRepository _hardCodedDBRepository;
-        public UserServices(HardCodedDBRepository hardCodedDBRepository)
-        {
-            _hardCodedDBRepository = hardCodedDBRepository;
+        public readonly UserHardCodedDBRepository _userHardCodedDBRepository;
+        public UserServices(UserHardCodedDBRepository userHardCodedDBRepository)
+        { 
+            _userHardCodedDBRepository = userHardCodedDBRepository;
         }
 
         public void AddUser(CreateUserDTO createUserDTO)
         {
-            if (_hardCodedDBRepository.users.All(user => user.Username != createUserDTO.Username))
+            if (_userHardCodedDBRepository.users.All(user => user.Username != createUserDTO.Username))
             {
-                _hardCodedDBRepository.AddUser(
+                _userHardCodedDBRepository.AddUser(
                     new User
                     {
-                        Id = _hardCodedDBRepository.users.Max(x => x.Id) + 1,
+                        Id = _userHardCodedDBRepository.users.Max(x => x.Id) + 1,
                         Username = createUserDTO.Username,
                         Password = createUserDTO.Password
                     }
                     );
             }
-            else 
+            else
             {
                 throw new InvalidOperationException();
             }

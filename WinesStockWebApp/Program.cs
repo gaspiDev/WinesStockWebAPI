@@ -10,7 +10,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddSingleton<HardCodedDBRepository>();
+builder.Services.AddSingleton<WineHardCodedDBRepository>();
+builder.Services.AddSingleton<UserHardCodedDBRepository>();
+
 builder.Services.AddScoped<WineServices>();
 builder.Services.AddScoped<UserServices>();
 

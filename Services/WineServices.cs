@@ -12,21 +12,21 @@ namespace Services
 {
     public class WineServices
     {
-        public readonly HardCodedDBRepository _hardCodedDBRepository;
-        public WineServices(HardCodedDBRepository hardCodedDBRepository)
+        public readonly WineHardCodedDBRepository _wineHardCodedDBRepository;
+        public WineServices(WineHardCodedDBRepository hardCodedDBRepository)
         {
-            _hardCodedDBRepository = hardCodedDBRepository;
+            _wineHardCodedDBRepository = hardCodedDBRepository;
         }
 
 
         public void AddWine(CreateWineDTO createWineDTO)
         {
-            if (_hardCodedDBRepository.wines.All((wine => wine.Name != createWineDTO.Name)))
+            if (_wineHardCodedDBRepository.wines.All(wine => wine.Name != createWineDTO.Name))
             {
-                _hardCodedDBRepository.AddWine(
+                _wineHardCodedDBRepository.AddWine(
                 new Wine
                 {
-                    Id = _hardCodedDBRepository.wines.Max(x => x.Id) + 1,
+                    Id = _wineHardCodedDBRepository.wines.Max(x => x.Id) + 1,
                     Name = createWineDTO.Name,
                     Variety = createWineDTO.Variety,
                     Year = createWineDTO.Year,
@@ -41,7 +41,7 @@ namespace Services
 
         public Dictionary<string, int> GetAllWinesStock()
         {
-            return _hardCodedDBRepository.GetAllWinesStock();
+            return _wineHardCodedDBRepository.GetAllWinesStock();
         }
     }
 }
