@@ -10,10 +10,10 @@ using Common.Models;
 
 namespace Services
 {
-    public class WineServices
+    public class WineServices : IWineServices
     {
-        public readonly WineHardCodedDBRepository _wineHardCodedDBRepository;
-        public WineServices(WineHardCodedDBRepository hardCodedDBRepository)
+        public readonly IWineHardCodedDBRepository _wineHardCodedDBRepository;
+        public WineServices(IWineHardCodedDBRepository hardCodedDBRepository)
         {
             _wineHardCodedDBRepository = hardCodedDBRepository;
         }
@@ -21,12 +21,12 @@ namespace Services
 
         public void AddWine(CreateWineDTO createWineDTO)
         {
-            if (_wineHardCodedDBRepository.wines.All(wine => wine.Name != createWineDTO.Name))
+            if (_wineHardCodedDBRepository.GetWines().All(wine => wine.Name != createWineDTO.Name))
             {
                 _wineHardCodedDBRepository.AddWine(
                 new Wine
                 {
-                    Id = _wineHardCodedDBRepository.wines.Max(x => x.Id) + 1,
+                    Id = _wineHardCodedDBRepository.GetWines().Max(x => x.Id) + 1,
                     Name = createWineDTO.Name,
                     Variety = createWineDTO.Variety,
                     Year = createWineDTO.Year,

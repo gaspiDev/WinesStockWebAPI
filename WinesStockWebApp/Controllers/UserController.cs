@@ -9,8 +9,8 @@ namespace WinesStockWebApp.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        public readonly UserServices _userServices;
-        public UserController(UserServices userServices)
+        public readonly IUserServices _userServices;
+        public UserController(IUserServices userServices)
         {
             _userServices = userServices;
         }

@@ -9,22 +9,22 @@ using System.Threading.Tasks;
 
 namespace Services
 {
-    public class UserServices
+    public class UserServices : IUserServices
     {
-        public readonly UserHardCodedDBRepository _userHardCodedDBRepository;
-        public UserServices(UserHardCodedDBRepository userHardCodedDBRepository)
-        { 
+        public readonly IUserHardCodedDBRepository _userHardCodedDBRepository;
+        public UserServices(IUserHardCodedDBRepository userHardCodedDBRepository)
+        {
             _userHardCodedDBRepository = userHardCodedDBRepository;
         }
 
         public void AddUser(CreateUserDTO createUserDTO)
         {
-            if (_userHardCodedDBRepository.users.All(user => user.Username != createUserDTO.Username))
+            if (_userHardCodedDBRepository.GetUsers().All(user => user.Username != createUserDTO.Username))
             {
                 _userHardCodedDBRepository.AddUser(
                     new User
                     {
-                        Id = _userHardCodedDBRepository.users.Max(x => x.Id) + 1,
+                        Id = _userHardCodedDBRepository.GetUsers().Max(x => x.Id) + 1,
                         Username = createUserDTO.Username,
                         Password = createUserDTO.Password
                     }

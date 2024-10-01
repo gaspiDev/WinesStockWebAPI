@@ -10,11 +10,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddSingleton<WineHardCodedDBRepository>();
-builder.Services.AddSingleton<UserHardCodedDBRepository>();
+builder.Services.AddSingleton<IWineHardCodedDBRepository, WineHardCodedDBRepository>();
+builder.Services.AddSingleton<IUserHardCodedDBRepository, UserHardCodedDBRepository>();
 
-builder.Services.AddScoped<WineServices>();
-builder.Services.AddScoped<UserServices>();
+builder.Services.AddScoped<IWineServices, WineServices>();
+builder.Services.AddScoped<IUserServices, UserServices>();
 
 
 

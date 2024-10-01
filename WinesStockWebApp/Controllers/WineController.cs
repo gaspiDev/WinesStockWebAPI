@@ -9,8 +9,8 @@ namespace WinesStockWebApp.Controllers
     [ApiController]
     public class WineController : ControllerBase
     {
-        public readonly WineServices _wineServices;
-        public WineController(WineServices wineServices, UserServices userServices)
+        public readonly IWineServices _wineServices;
+        public WineController(IWineServices wineServices)
         {
             _wineServices = wineServices;
         }

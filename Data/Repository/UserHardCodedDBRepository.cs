@@ -7,14 +7,10 @@ using System.Threading.Tasks;
 
 namespace Data.Repository
 {
-    public class UserHardCodedDBRepository
+    public class UserHardCodedDBRepository : IUserHardCodedDBRepository
     {
-        public void AddUser(User user)
-        {
-            users.Add(user);
-        }
 
-        public List<User> users = new List<User>()
+        private List<User> users = new List<User>()
         {
             new User
             {
@@ -35,5 +31,13 @@ namespace Data.Repository
                 Password = "Admin2024!"
             }
         };
+        public List<User> GetUsers()
+        { 
+            return users;
+        }
+        public void AddUser(User user)
+        {
+            users.Add(user);
+        }
     }
 }

@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Data.Repository
 {
-    public class WineHardCodedDBRepository
+    public class WineHardCodedDBRepository : IWineHardCodedDBRepository
     {
-        public List<Wine> wines = new List<Wine>()
+        private List<Wine> wines = new List<Wine>()
         {
             new Wine
             {
@@ -62,8 +62,12 @@ namespace Data.Repository
                 CreatedAt = new DateTime(2023, 6, 5)
             }
         };
-        public void AddWine(Wine wine)
+        public List<Wine> GetWines()
         { 
+            return wines;
+        }
+        public void AddWine(Wine wine)
+        {
             wines.Add(wine);
         }
         public Dictionary<string, int> GetAllWinesStock()
