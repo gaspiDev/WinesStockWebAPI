@@ -16,6 +16,10 @@ namespace Services
         {
             _userHardCodedDBRepository = userHardCodedDBRepository;
         }
+        public User? ValidateUser(CredentialsDTO credentialsDTO) 
+        {
+            return _userHardCodedDBRepository.ValidateUser(credentialsDTO);    
+        }
 
         public void AddUser(CreateUserDTO createUserDTO)
         {

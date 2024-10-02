@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Common.Models;
 
 namespace Data.Repository
 {
@@ -34,6 +35,11 @@ namespace Data.Repository
         public List<User> GetUsers()
         { 
             return users;
+        }
+
+        public User? ValidateUser(CredentialsDTO credentialsDTO) 
+        {
+            return GetUsers().FirstOrDefault(u => u.Username == credentialsDTO.UserName && u.Password == credentialsDTO.Password);
         }
         public void AddUser(User user)
         {
