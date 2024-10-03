@@ -5,7 +5,7 @@ namespace Services
 {
     public interface IUserServices
     {
-        public User? ValidateUser(CredentialsDTO credentialsDTO);
-        void AddUser(CreateUserDTO createUserDTO);
+        User? ValidateUser(CredentialsDTO credentialsDTO);
+        int AddUser(CreateUserDTO createUserDTO);
     }
 }

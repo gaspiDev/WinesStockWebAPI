@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Common.Models;
 using Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WinesStockWebApp.Controllers
 {
@@ -25,13 +26,13 @@ namespace WinesStockWebApp.Controllers
             }
             try
             {
-                _wineServices.AddWine(wineDTO);
+                int newWineId = _wineServices.AddWine(wineDTO);
+                return Ok($"The Wine Id: {newWineId} has created succesfully.");
             }
             catch (InvalidOperationException)
             {
-                return BadRequest($"A wine with the name {wineDTO.Name.ToUpper()} already exists and can't store duplicates");
+                return BadRequest($"A wine with the name {wineDTO.Name.ToUpper()} already exists and can't store duplicates.");
             }
-            return Created("Location", "Resource");
         }
 
         [HttpGet]

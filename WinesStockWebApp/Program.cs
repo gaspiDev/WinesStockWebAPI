@@ -1,5 +1,8 @@
+using Data;
 using Data.Repository;
 using Services;
+using Microsoft.EntityFrameworkCore;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,12 +13,13 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddSingleton<IWineHardCodedDBRepository, WineHardCodedDBRepository>();
-builder.Services.AddSingleton<IUserHardCodedDBRepository, UserHardCodedDBRepository>();
+builder.Services.AddScoped<IWineRepository, WineRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 builder.Services.AddScoped<IWineServices, WineServices>();
 builder.Services.AddScoped<IUserServices, UserServices>();
 
+builder.Services.AddDbContext<WinesStockContext>(dbContextOptions => dbContextOptions.UseSqlite(builder.Configuration["ConnectionStrings:WinesStockWebAppConnectionString"]));
 
 
 var app = builder.Build();
@@ -29,6 +33,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

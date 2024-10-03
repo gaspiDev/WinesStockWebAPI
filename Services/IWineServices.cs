@@ -4,7 +4,7 @@ namespace Services
 {
     public interface IWineServices
     {
-        void AddWine(CreateWineDTO createWineDTO);
+        int AddWine(CreateWineDTO createWineDTO);
         Dictionary<string, int> GetAllWinesStock();
     }
 }
