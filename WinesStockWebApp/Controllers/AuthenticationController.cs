@@ -31,7 +31,7 @@ namespace WinesStockWebApp.Controllers
             User? user = _userServices.ValidateUser(credentialsDTO);
             if (user == null)
             {
-                return Unauthorized("Login Error");
+                return Unauthorized("Username or Password are incorrect");
             }
 
             SymmetricSecurityKey securityPassword = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_configuration["Authentication:SecretForKey"]!));

@@ -25,7 +25,7 @@ builder.Services.AddSwaggerGen(setupAction =>
     {
         Type = SecuritySchemeType.Http,
         Scheme = "Bearer",
-        Description = "Acá pegar el token generado al loguearse."
+        Description = "Insert JWT, generated after being logged."
     });
 
     setupAction.AddSecurityRequirement(new OpenApiSecurityRequirement
