@@ -11,24 +11,29 @@ namespace Services
 {
     public class UserServices : IUserServices
     {
-        public readonly IUserHardCodedDBRepository _userHardCodedDBRepository;
-        public UserServices(IUserHardCodedDBRepository userHardCodedDBRepository)
+        public readonly IUserRepository _userRepository;
+        public UserServices(IUserRepository userRepository)
         {
-            _userHardCodedDBRepository = userHardCodedDBRepository;
+            _userRepository = userRepository;
+        }
+        public User? ValidateUser(CredentialsDTO credentialsDTO) 
+        {
+            return _userRepository.ValidateUser(credentialsDTO);    
         }
 
-        public void AddUser(CreateUserDTO createUserDTO)
+        public int AddUser(CreateUserDTO createUserDTO)
         {
-            if (_userHardCodedDBRepository.GetUsers().All(user => user.Username != createUserDTO.Username))
+            if (_userRepository.GetUsers().All(user => user.Username != createUserDTO.Username))
             {
-                _userHardCodedDBRepository.AddUser(
+                int newUserId = _userRepository.AddUser(
                     new User
                     {
-                        Id = _userHardCodedDBRepository.GetUsers().Max(x => x.Id) + 1,
+                        Id = _userRepository.GetUsers().Max(x => x.Id) + 1,
                         Username = createUserDTO.Username,
                         Password = createUserDTO.Password
                     }
                     );
+                return newUserId;
             }
             else
             {

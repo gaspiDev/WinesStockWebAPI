@@ -1,4 +1,5 @@
 ﻿using Common.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Services;
@@ -14,6 +15,7 @@ namespace WinesStockWebApp.Controllers
         {
             _userServices = userServices;
         }
+
         [HttpPost]
         [Route("User")]
         public IActionResult AddUser([FromBody] CreateUserDTO userDTO)
@@ -24,13 +26,13 @@ namespace WinesStockWebApp.Controllers
             }
             try
             {
-                _userServices.AddUser(userDTO);
+                int newUserId = _userServices.AddUser(userDTO);
+                return Ok($"The User Id: {newUserId} has created succesfully.");
             }
             catch (InvalidOperationException)
             {
                 return BadRequest($"A user with the username {userDTO.Username.ToUpper()} already exists and can't store duplicates");
             }
-            return Created("Location", "Resource");
         }
     }
 }

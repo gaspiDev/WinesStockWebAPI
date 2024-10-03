@@ -2,10 +2,10 @@
 
 namespace Data.Repository
 {
-    public interface IWineHardCodedDBRepository
+    public interface IWineRepository
     {
         public List<Wine> GetWines();
-        void AddWine(Wine wine);
+        int AddWine(Wine wine);
         Dictionary<string, int> GetAllWinesStock();
     }
 }

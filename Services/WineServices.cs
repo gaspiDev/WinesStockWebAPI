@@ -12,21 +12,21 @@ namespace Services
 {
     public class WineServices : IWineServices
     {
-        public readonly IWineHardCodedDBRepository _wineHardCodedDBRepository;
-        public WineServices(IWineHardCodedDBRepository hardCodedDBRepository)
+        public readonly IWineRepository _wineRepository;
+        public WineServices(IWineRepository wineRepository)
         {
-            _wineHardCodedDBRepository = hardCodedDBRepository;
+            _wineRepository = wineRepository;
         }
 
 
-        public void AddWine(CreateWineDTO createWineDTO)
+        public int AddWine(CreateWineDTO createWineDTO)
         {
-            if (_wineHardCodedDBRepository.GetWines().All(wine => wine.Name != createWineDTO.Name))
+            if (_wineRepository.GetWines().All(wine => wine.Name != createWineDTO.Name))
             {
-                _wineHardCodedDBRepository.AddWine(
+                int newWineId  = _wineRepository.AddWine(
                 new Wine
                 {
-                    Id = _wineHardCodedDBRepository.GetWines().Max(x => x.Id) + 1,
+                    Id = _wineRepository.GetWines().Max(x => x.Id) + 1,
                     Name = createWineDTO.Name,
                     Variety = createWineDTO.Variety,
                     Year = createWineDTO.Year,
@@ -35,13 +35,14 @@ namespace Services
                     CreatedAt = DateTime.UtcNow,
                 }
                 );
+                return newWineId;
             }
             else throw new InvalidOperationException();
         }
 
         public Dictionary<string, int> GetAllWinesStock()
         {
-            return _wineHardCodedDBRepository.GetAllWinesStock();
+            return _wineRepository.GetAllWinesStock();
         }
     }
 }
