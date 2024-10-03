@@ -24,7 +24,7 @@ namespace WinesStockWebApp.Controllers
             User? user = _userServices.ValidateUser(credentialsDTO);
             if (user == null)
             {
-                return Unauthorized();
+                return Unauthorized("Login Error");
             }
             //add all logic for returning the JWT
             return Ok();
