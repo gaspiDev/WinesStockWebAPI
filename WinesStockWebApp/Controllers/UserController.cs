@@ -15,7 +15,7 @@ namespace WinesStockWebApp.Controllers
         {
             _userServices = userServices;
         }
-
+        [Authorize]
         [HttpPost]
         [Route("User")]
         public IActionResult AddUser([FromBody] CreateUserDTO userDTO)

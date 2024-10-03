@@ -16,6 +16,7 @@ namespace WinesStockWebApp.Controllers
             _wineServices = wineServices;
         }
 
+        [Authorize]
         [HttpPost]
         [Route("Wine")]
         public IActionResult AddWine([FromBody] CreateWineDTO wineDTO)
@@ -35,6 +36,7 @@ namespace WinesStockWebApp.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet]
         [Route("WineStock")]
         public IActionResult GetAllWinesStock()
