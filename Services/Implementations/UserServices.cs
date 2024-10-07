@@ -1,13 +1,9 @@
 ﻿using Common.Models;
 using Data.Entities;
-using Data.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Data.Repository.Interfaces;
+using Services.Interfaces;
 
-namespace Services
+namespace Services.Implementations
 {
     public class UserServices : IUserServices
     {
@@ -16,9 +12,9 @@ namespace Services
         {
             _userRepository = userRepository;
         }
-        public User? ValidateUser(CredentialsDTO credentialsDTO) 
+        public User? ValidateUser(CredentialsDTO credentialsDTO)
         {
-            return _userRepository.ValidateUser(credentialsDTO);    
+            return _userRepository.ValidateUser(credentialsDTO);
         }
 
         public int AddUser(CreateUserDTO createUserDTO)

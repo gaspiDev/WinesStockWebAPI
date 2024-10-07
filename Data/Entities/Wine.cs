@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,7 +16,7 @@ namespace Data.Entities
 
 
         // Variedad del vino (ej: Cabernet Sauvignon)
-        public string Variety { get; set; } = string.Empty;
+        public Variety Variety { get; set; } = Variety.None;
 
         // Año de cosecha, debe ser un valor válido
         public int Year { get; set; }

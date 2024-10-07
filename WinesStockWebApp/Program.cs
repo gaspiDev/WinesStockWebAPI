@@ -1,11 +1,13 @@
 using Data;
-using Data.Repository;
-using Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text.Json.Serialization;
 using Microsoft.OpenApi.Models;
 using System.Text;
+using Data.Repository.Interfaces;
+using Data.Repository.Implementations;
+using Services.Interfaces;
+using Services.Implementations;
 
 
 var builder = WebApplication.CreateBuilder(args);

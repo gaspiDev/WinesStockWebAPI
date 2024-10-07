@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Common.Models;
-using Services;
 using Microsoft.AspNetCore.Authorization;
+using Services.Interfaces;
+using Common.Enums;
 
 namespace WinesStockWebApp.Controllers
 {
@@ -18,7 +19,7 @@ namespace WinesStockWebApp.Controllers
 
         [Authorize]
         [HttpPost]
-        [Route("Wine")]
+        [Route("NewWine")]
         public IActionResult AddWine([FromBody] CreateWineDTO wineDTO)
         {
             if (wineDTO == null)
@@ -38,10 +39,27 @@ namespace WinesStockWebApp.Controllers
 
         [Authorize]
         [HttpGet]
-        [Route("WineStock")]
+        [Route("WineStockAll")]
         public IActionResult GetAllWinesStock()
         {
             return Ok(_wineServices.GetAllWinesStock());
         }
+
+        [Authorize]
+        [HttpGet]
+        [Route("WineStockByVariety")]
+        public IActionResult GetByVarietyWineStock(Variety variety) 
+        {
+            return Ok(_wineServices.GetByVarietyWinesStock(variety));
+        }
+
+        [Authorize]
+        [HttpPut]
+        [Route("ModifyWineStockByVariety")]
+        public IActionResult ModifyWineStockByVariety([FromBody] ModifyByIdWineStock newWineStock) 
+        {
+            return Ok($"Wine Id: {_wineServices.ModifyWineStockByVariety(newWineStock).Id}, now has {_wineServices.ModifyWineStockByVariety(newWineStock).Stock} bottles of stock.");   
+        }
+
     }
 }

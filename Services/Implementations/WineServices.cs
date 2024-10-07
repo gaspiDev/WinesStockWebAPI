@@ -1,14 +1,10 @@
-﻿using Data.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Data.Entities;
-using Microsoft.VisualBasic;
+﻿using Data.Entities;
 using Common.Models;
+using Data.Repository.Interfaces;
+using Services.Interfaces;
+using Common.Enums;
 
-namespace Services
+namespace Services.Implementations
 {
     public class WineServices : IWineServices
     {
@@ -23,7 +19,7 @@ namespace Services
         {
             if (_wineRepository.GetWines().All(wine => wine.Name != createWineDTO.Name))
             {
-                int newWineId  = _wineRepository.AddWine(
+                int newWineId = _wineRepository.AddWine(
                 new Wine
                 {
                     Id = _wineRepository.GetWines().Max(x => x.Id) + 1,
@@ -43,6 +39,16 @@ namespace Services
         public Dictionary<string, int> GetAllWinesStock()
         {
             return _wineRepository.GetAllWinesStock();
+        }
+
+        public Dictionary<string, int> GetByVarietyWinesStock(Variety variety)
+        {
+            return _wineRepository.GetByVarietyWinesStock(variety);
+        }
+
+        public ModifyByIdWineStock ModifyWineStockByVariety(ModifyByIdWineStock newWineStock) 
+        {
+            return _wineRepository.ModifyWineStockByVariety(newWineStock);
         }
     }
 }

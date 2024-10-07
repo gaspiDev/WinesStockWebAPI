@@ -1,7 +1,7 @@
 ﻿using Common.Models;
 using Data.Entities;
 
-namespace Services
+namespace Services.Interfaces
 {
     public interface IUserServices
     {

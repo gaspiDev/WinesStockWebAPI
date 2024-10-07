@@ -1,12 +1,8 @@
 ﻿using Data.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Common.Models;
+using Data.Repository.Interfaces;
 
-namespace Data.Repository
+namespace Data.Repository.Implementations
 {
     public class UserRepository : IUserRepository
     {
@@ -16,11 +12,11 @@ namespace Data.Repository
         {
             _context = winesStockContext;
         }
-        public List<User> GetUsers()
-        { 
+        public IEnumerable<User> GetUsers()
+        {
             return _context.Users.ToList();
         }
-        public User? ValidateUser(CredentialsDTO credentialsDTO) 
+        public User? ValidateUser(CredentialsDTO credentialsDTO)
         {
             return _context.Users.FirstOrDefault(u => u.Username == credentialsDTO.UserName && u.Password == credentialsDTO.Password);
         }
