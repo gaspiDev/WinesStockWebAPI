@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Common.Models
 {
-    public class CredentialsDTO
+    public class CredentialsDto
     {
         [Required]
         public string? UserName { get; set; }
