@@ -1,13 +1,14 @@
 ﻿using Common.Enums;
 using Common.Models;
+using Data.Entities;
 
 namespace Services.Interfaces
 {
     public interface IWineServices
     {
-        int AddWine(CreateWineDTO createWineDTO);
-        Dictionary<string, int> GetAllWinesStock();
-        Dictionary<string, int> GetByVarietyWinesStock(Variety variety);
-        ModifyByIdWineStock ModifyWineStockByVariety(ModifyByIdWineStock newWineStock);
+        int CreateWine(NewWineDto createWineDTO);
+        IEnumerable<Wine> ReadWine();
+        IEnumerable<Wine> ReadWineByVariety(Variety variety);
+        void UpdateWinestockById(int id, int stock);
     }
 }

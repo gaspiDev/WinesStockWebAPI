@@ -26,9 +26,9 @@ namespace WinesStockWebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Authenticate([FromBody] CredentialsDTO credentialsDTO)
+        public IActionResult AuthUser([FromBody] CredentialsDto credentialsDto)
         {
-            User? user = _userServices.ValidateUser(credentialsDTO);
+            User? user = _userServices.AuthUser(credentialsDto);
             if (user == null)
             {
                 return Unauthorized("Username or Password are incorrect");

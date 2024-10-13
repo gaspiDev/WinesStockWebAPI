@@ -10,13 +10,10 @@ namespace Data.Entities
 {
     public class WineTasting
     {
-        public DateTime Date { get; set; }
-        [Key]
-        [Required]
-        public string Title { get; set; }
-        [ForeignKey("Wine")]
-        public ICollection<Wine> Wines { get; set; }
-        public ICollection<string> Guests { get; set; }
-        // Migration pending due to not knowing if the relationship One(WineTastieng) to Many(Wine) is well implemented.
+        public int Id { get; set; }
+        public required string Title { get; set; }
+        public DateTime? Date { get; set; }
+        public ICollection<string>? Guests { get; set; }
+        public ICollection<WineTastingWine> WineTastingWines { get; set; }
     }
 }

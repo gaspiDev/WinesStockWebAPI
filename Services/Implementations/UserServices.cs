@@ -12,24 +12,31 @@ namespace Services.Implementations
         {
             _userRepository = userRepository;
         }
-        public User? ValidateUser(CredentialsDTO credentialsDTO)
+        public User? AuthUser(CredentialsDto credentialsDto)
         {
-            return _userRepository.ValidateUser(credentialsDTO);
+            return _userRepository.AuthUser(credentialsDto);
         }
 
-        public int AddUser(CreateUserDTO createUserDTO)
+        public int CreateUser(NewUserDto newUserDto)
         {
-            if (_userRepository.GetUsers().All(user => user.Username != createUserDTO.Username))
+            if (_userRepository.ReadUsers().All(user => user.Username != newUserDto.Username))
             {
-                int newUserId = _userRepository.AddUser(
-                    new User
-                    {
-                        Id = _userRepository.GetUsers().Max(x => x.Id) + 1,
-                        Username = createUserDTO.Username,
-                        Password = createUserDTO.Password
-                    }
-                    );
-                return newUserId;
+                try
+                {
+                    int newUserId = _userRepository.CreateUser(
+                        new User
+                        {
+                            Id = _userRepository.ReadUsers().Max(x => x.Id) + 1,
+                            Username = newUserDto.Username,
+                            Password = newUserDto.Password
+                        }
+                        );
+                    return newUserId;
+                }
+                catch (Exception) 
+                {
+                    throw new Exception();
+                }
             }
             else
             {

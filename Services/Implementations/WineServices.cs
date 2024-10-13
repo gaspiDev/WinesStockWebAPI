@@ -15,40 +15,65 @@ namespace Services.Implementations
         }
 
 
-        public int AddWine(CreateWineDTO createWineDTO)
+        public int CreateWine(NewWineDto createWineDTO)
         {
             if (_wineRepository.GetWines().All(wine => wine.Name != createWineDTO.Name))
             {
-                int newWineId = _wineRepository.AddWine(
-                new Wine
+                try
                 {
-                    Id = _wineRepository.GetWines().Max(x => x.Id) + 1,
-                    Name = createWineDTO.Name,
-                    Variety = createWineDTO.Variety,
-                    Year = createWineDTO.Year,
-                    Region = createWineDTO.Region,
-                    Stock = createWineDTO.Stock,
-                    CreatedAt = DateTime.UtcNow,
+                    int newWineId = _wineRepository.CreateWine(
+                    new Wine
+                    {
+                        Name = createWineDTO.Name,
+                        Variety = createWineDTO.Variety,
+                        Year = createWineDTO.Year,
+                        Region = createWineDTO.Region,
+                        Stock = createWineDTO.Stock,
+                    }
+                    );
+                    return newWineId;
                 }
-                );
-                return newWineId;
+                catch (Exception) 
+                {
+                    throw new Exception();
+                }
             }
             else throw new InvalidOperationException();
         }
 
-        public Dictionary<string, int> GetAllWinesStock()
+        public IEnumerable<Wine> ReadWine()
         {
-            return _wineRepository.GetAllWinesStock();
+            try
+            {
+                return _wineRepository.ReadWine();
+            }
+            catch (Exception) 
+            {
+                throw new Exception();
+            }
         }
 
-        public Dictionary<string, int> GetByVarietyWinesStock(Variety variety)
+        public IEnumerable<Wine> ReadWineByVariety(Variety variety)
         {
-            return _wineRepository.GetByVarietyWinesStock(variety);
+            try 
+            {
+                return _wineRepository.ReadWineByVariety(variety);
+            } catch (Exception)
+            { 
+                throw new Exception();
+            }
         }
 
-        public ModifyByIdWineStock ModifyWineStockByVariety(ModifyByIdWineStock newWineStock) 
+        public void UpdateWinestockById(int id, int stock)
         {
-            return _wineRepository.ModifyWineStockByVariety(newWineStock);
+            try
+            {
+                _wineRepository.UpdateWinestockById(id, stock);
+            }
+            catch (Exception)
+            {
+                throw new Exception();
+            }
         }
     }
 }

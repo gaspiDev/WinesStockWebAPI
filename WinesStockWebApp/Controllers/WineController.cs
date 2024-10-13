@@ -9,6 +9,7 @@ namespace WinesStockWebApp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class WineController : ControllerBase
     {
         public readonly IWineServices _wineServices;
@@ -17,48 +18,68 @@ namespace WinesStockWebApp.Controllers
             _wineServices = wineServices;
         }
 
-        [Authorize]
         [HttpPost]
-        [Route("NewWine")]
-        public IActionResult AddWine([FromBody] CreateWineDTO wineDTO)
+        public IActionResult CreateWine([FromBody] NewWineDto wineDTO)
         {
-            if (wineDTO == null)
-            {
-                return BadRequest("The request's body is null.");
-            }
             try
             {
-                int newWineId = _wineServices.AddWine(wineDTO);
+                int newWineId = _wineServices.CreateWine(wineDTO);
                 return Ok($"The Wine Id: {newWineId} has created succesfully.");
             }
-            catch (InvalidOperationException)
+            catch (Exception)
             {
                 return BadRequest($"A wine with the name {wineDTO.Name.ToUpper()} already exists and can't store duplicates.");
             }
         }
 
-        [Authorize]
         [HttpGet]
-        [Route("WineStockAll")]
-        public IActionResult GetAllWinesStock()
+        public IActionResult ReadWine()
         {
-            return Ok(_wineServices.GetAllWinesStock());
+            try
+            {
+                return Ok(_wineServices.ReadWine());
+            }
+            catch (Exception)
+            {
+                return NotFound("Can't get access to wines information.");
+            }
         }
 
-        [Authorize]
         [HttpGet]
-        [Route("WineStockByVariety")]
-        public IActionResult GetByVarietyWineStock(Variety variety) 
+        [Route("variety/{variety}")]
+        public IActionResult ReadWineByVariety(Variety variety) 
         {
-            return Ok(_wineServices.GetByVarietyWinesStock(variety));
+            try
+            {
+                return Ok(_wineServices.ReadWineByVariety(variety));
+            }
+            catch (Exception)
+            {
+                return NotFound("Can't get access to wines information.");
+            }
+
         }
 
-        [Authorize]
         [HttpPut]
-        [Route("ModifyWineStockByVariety")]
-        public IActionResult ModifyWineStockByVariety([FromBody] ModifyByIdWineStock newWineStock) 
+        [Route("{id}/stock")]
+        public IActionResult UpdateWinestockById(int id,[FromBody] int stock) 
         {
-            return Ok($"Wine Id: {_wineServices.ModifyWineStockByVariety(newWineStock).Id}, now has {_wineServices.ModifyWineStockByVariety(newWineStock).Stock} bottles of stock.");   
+            if (stock > 0)
+            {
+                try
+                {
+                    _wineServices.UpdateWinestockById(id, stock);
+                    return Ok($"Wine Id: {id}, now has {stock} bottles of stock.");
+                }
+                catch (Exception)
+                {
+                    return BadRequest("The wine Id or Stock isn't valid.");
+                }
+            }
+            else 
+            {
+             return BadRequest("The input stock must be greater than 0.");
+            }
         }
 
     }

@@ -8,6 +8,7 @@ namespace WinesStockWebApp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class UserController : ControllerBase
     {
         public readonly IUserServices _userServices;
@@ -15,23 +16,18 @@ namespace WinesStockWebApp.Controllers
         {
             _userServices = userServices;
         }
-        [Authorize]
+
         [HttpPost]
-        [Route("User")]
-        public IActionResult AddUser([FromBody] CreateUserDTO userDTO)
+        public IActionResult AddUser([FromBody] NewUserDto userDto)
         {
-            if (userDTO == null)
-            {
-                return BadRequest("The request's body is null.");
-            }
             try
             {
-                int newUserId = _userServices.AddUser(userDTO);
+                int newUserId = _userServices.CreateUser(userDto);
                 return Ok($"The User Id: {newUserId} has created succesfully.");
             }
-            catch (InvalidOperationException)
+            catch (Exception)
             {
-                return BadRequest($"A user with the username {userDTO.Username.ToUpper()} already exists and can't store duplicates");
+                return BadRequest($"A user with the username {userDto.Username.ToUpper()} already exists and can't store duplicates");
             }
         }
     }

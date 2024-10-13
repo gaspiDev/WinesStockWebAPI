@@ -5,7 +5,7 @@ namespace Services.Interfaces
 {
     public interface IUserServices
     {
-        User? ValidateUser(CredentialsDTO credentialsDTO);
-        int AddUser(CreateUserDTO createUserDTO);
+        User? AuthUser(CredentialsDto credentialsDTO);
+        int CreateUser(NewUserDto createUserDTO);
     }
 }

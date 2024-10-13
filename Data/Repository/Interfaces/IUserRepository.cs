@@ -5,8 +5,8 @@ namespace Data.Repository.Interfaces
 {
     public interface IUserRepository
     {
-        User? ValidateUser(CredentialsDTO credentialsDTO);
-        IEnumerable<User> GetUsers();
-        int AddUser(User user);
+        User? AuthUser(CredentialsDto credentialsDTO);
+        IEnumerable<User> ReadUsers();
+        int CreateUser(User user);
     }
 }

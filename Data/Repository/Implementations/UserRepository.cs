@@ -12,19 +12,26 @@ namespace Data.Repository.Implementations
         {
             _context = winesStockContext;
         }
-        public IEnumerable<User> GetUsers()
+        public IEnumerable<User> ReadUsers()
         {
             return _context.Users.ToList();
         }
-        public User? ValidateUser(CredentialsDTO credentialsDTO)
+        public User? AuthUser(CredentialsDto credentialsDto)
         {
-            return _context.Users.FirstOrDefault(u => u.Username == credentialsDTO.UserName && u.Password == credentialsDTO.Password);
+            return _context.Users.FirstOrDefault(u => u.Username == credentialsDto.UserName && u.Password == credentialsDto.Password);
         }
-        public int AddUser(User user)
+        public int CreateUser(User user)
         {
-            _context.Users.Add(user);
-            _context.SaveChanges();
-            return _context.Users.Max(u => u.Id);
+            try
+            {
+                _context.Users.Add(user);
+                _context.SaveChanges();
+                return _context.Users.Max(u => u.Id);
+            }
+            catch (Exception) 
+            {
+                throw new Exception();
+            }
         }
     }
 }
