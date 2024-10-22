@@ -15,10 +15,10 @@ namespace Data.Entities
         public int Id { get; set; }
         public required string Name { get; set; }
         public Variety Variety { get; set; } = Variety.None;
-        public int? Year { get; set; }
-        public string? Region { get; set; }
+        public required int Year { get; set; }
+        public required string Region { get; set; }
         [Range(1, int.MaxValue)]
-        public int? Stock { get; set; }
+        public int Stock { get; set; } = 0;
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public ICollection<WineTastingWine> WineTastingWines { get; set; } = [];
     }

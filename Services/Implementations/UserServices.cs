@@ -26,7 +26,6 @@ namespace Services.Implementations
                     int newUserId = _userRepository.CreateUser(
                         new User
                         {
-                            Id = _userRepository.ReadUsers().Max(x => x.Id) + 1,
                             Username = newUserDto.Username,
                             Password = newUserDto.Password
                         }

@@ -8,12 +8,10 @@ namespace Data.Entities
 {
     public class WineTastingWine
     {
-        public int WineId { get; set; }
-        public Wine Wine { get; set; }
+        public required int WineId { get; set; }
+        public required Wine Wine { get; set; }
 
-        public int WineTastingId { get; set; }
-        public WineTasting WineTasting { get; set; }
+        public required int WineTastingId { get; set; }
+        public  required WineTasting WineTasting { get; set; }
     }
-
-
 }

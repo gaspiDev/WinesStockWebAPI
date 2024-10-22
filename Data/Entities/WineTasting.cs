@@ -12,8 +12,9 @@ namespace Data.Entities
     {
         public int Id { get; set; }
         public required string Title { get; set; }
-        public DateTime? Date { get; set; }
-        public ICollection<string>? Guests { get; set; }
-        public ICollection<WineTastingWine> WineTastingWines { get; set; }
+        public int Year { get; set; } = DateTime.Now.Year;
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public ICollection<string> Guests { get; set; } = [];
+        public ICollection<WineTastingWine> WineTastingWines { get; set; } = [];
     }
 }
